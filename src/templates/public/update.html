@@ -2,11 +2,17 @@
 
 {% block content %}
 
-<form action="/atualizar/pessoa/{{pessoa.0}}" method="POST">
-    <input type="text" name="name" value="{{pessoa.1}}" placeholder="{{pessoa.1}}">
-    <input type="number" name="age" value="{{pessoa.2}}" placeholder="{{pessoa.2}}">
+<form action="/atualizar/pessoa/{{pessoa.0}}" method="POST" id="form_pessoa">
 
-    <button type="submit">Atualizar</button>
+    <label for="nome">Nome</label>
+    <input type="text" class="form-control" name="name" id="nome" value="{{pessoa.1}}">
+
+    <div class="form-group">
+    <label for="idade">Idade</label>
+    <input type="number" class="form-control" name="age" id="idade" min="0" value="{{pessoa.2}}">
+    
+    <button type="submit" class="btn btn-primary">Atualizar</button>
+    </div>
 </form>
 
 {% endblock %}

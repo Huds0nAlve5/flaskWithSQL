@@ -1,11 +1,13 @@
 #nome{
     width: 300px;
     margin: 0 auto;
+    text-align: center;
 }
 
 #idade{
     width: 70px;
     margin: 0 auto;
+    text-align: center;
 }
 
 #form_pessoa{
