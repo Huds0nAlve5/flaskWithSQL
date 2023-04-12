@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS pessoa(
 CREATE TABLE IF NOT EXISTS transacao(
     id INT(5) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT,
     descricao CHAR(60) NOT NULL,
-    value FLOAT NOT NULL,
+    value FLOAT() NOT NULL,
     id_pessoa INT(5) UNSIGNED ZEROFILL NOT NULL,
     id_type INT(5) NOT NULL,
     PRIMARY KEY(id)
@@ -22,3 +22,5 @@ CREATE TABLE IF NOT EXISTS tipo(
 
 ALTER TABLE transacao ADD FOREIGN KEY (id_type)REFERENCES tipo(id);
 ALTER TABLE transacao ADD FOREIGN KEY (id_pessoa)REFERENCES pessoa(id);
+INSERT INTO tipo VALUES(null, "Receita");
+INSERT INTO tipo VALUES(null, "Despesa");

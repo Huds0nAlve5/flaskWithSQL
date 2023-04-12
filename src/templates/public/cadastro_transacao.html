@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <form action="" method="POST" id="form_pessoa">
+        <label for="descricao">Descrição</label>
+        <input type="text" class="form-control" name="descricao" id="nome">
+        </div>
+
+        <div class="form-group">
+            <label for="value">Valor</label>
+            <input type="number" class="form-control" name="value" id="nome" min="0" step="0.01">
+        </div>
+
+        <div class="form-group">
+            <select name="id_pessoa" id="nome">
+                <option value="">---- Selecione a pessoa ----</option>
+                {% for pessoa in pessoas %}
+                    <option value="{{pessoa.0}}">{{pessoa.1}}</option>
+                {% endfor %}
+              </select>
+        </div>
+
+        <div class="form-group">
+            <select name="id_type" id="nome">
+                <option value="">---- Selecione o tipo ----</option>
+                {% for tipo in tipos %}
+                    <option value="{{tipo.0}}">{{tipo.1}}</option>
+                {% endfor %}
+              </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Cadastrar</button>
+    </form>
+
+    {% for pessoa in pessoas %}
+        {{pessoa.1}}
+        {{pessoa.2}}
+
+        <form action="/delete/pessoa/{{pessoa.0}}" method="POST">
+            <button>Deletar</button>
+        </form>
+
+        <a href="/atualizar/pessoa/{{pessoa.0}}">Atualizar</a>
+        
+
+    {% endfor %}
+{% endblock %}
