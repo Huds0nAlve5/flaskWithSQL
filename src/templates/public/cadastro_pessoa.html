@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <form action="" method="POST" id="form_pessoa">
+        <label for="nome">Nome</label>
+        <input type="text" class="form-control" id="nome">
+        </div>
+
+        <div class="form-group">
+        <label for="idade">Idade</label>
+        <input type="number" class="form-control" id="idade">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Cadastrar</button>
+    </form>
+
+    {% for pessoa in pessoas %}
+        {{pessoa.1}}
+        {{pessoa.2}}
+
+        <form action="/delete/pessoa/{{pessoa.0}}" method="POST">
+            <button>Deletar</button>
+        </form>
+
+        <a href="/atualizar/pessoa/{{pessoa.0}}">Atualizar</a>
+        
+
+    {% endfor %}
+{% endblock %}
