@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Nome</th>
+                <th scope="col">Idade</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for pessoa in pessoas %}
+                <tr>
+                    <td>{{pessoa.1}}</td>
+                    <td>{{pessoa.2}}</td>
+                    <td>
+                        <button><a href="/atualizar/pessoa/{{pessoa.0}}">Atualizar</a></button>
+                    </td>
+                    <td>
+                        <form action="/delete/pessoa/{{pessoa.0}}" method="POST">
+                            <button>Deletar</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

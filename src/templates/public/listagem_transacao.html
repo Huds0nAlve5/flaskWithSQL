@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Descrição</th>
+                <th scope="col">Valor</th>
+                <th scope="col">Pessoa</th>
+                <th scope="col">Tipo</th>
+            </tr>
+        </thead>
+        <tbody>    
+            {% for transacao in transacoes %}
+                <tr>
+                    <td>{{transacao.1}}</td>
+                    <td>R$ {{transacao.2}}</td>
+                    <td>{{pessoas[transacao.3-1].1}}</td>
+                    <td>{{tipos[transacao.4-1].1}}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

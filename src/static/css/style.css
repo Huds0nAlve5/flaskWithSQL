@@ -14,3 +14,26 @@
     text-align: center;
     margin-top: 30px;
 }
+
+table{
+    text-align: center;
+}
+
+table th{
+    font-weight: 700;
+    font-size: 20px;
+}
+
+table td{
+    font-size: 17px;
+}
+
+#receita{
+    color: green;
+    font-weight: 700;
+}
+
+#despesa{
+    color: red;
+    font-weight: 700;
+}

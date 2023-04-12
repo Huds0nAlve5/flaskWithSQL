@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Nome</th>
+                <th scope="col">Receitas</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for pessoa in pessoas_receita %}
+                <tr>
+                    <td>{{pessoa.0}}</td>
+                    <td id="receita">R$ {{pessoa.1}}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Nome</th>
+                <th scope="col">Despesas</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for pessoa in pessoas_despesa %}
+                <tr>
+                    <td>{{pessoa.0}}</td>
+                    <td id="despesa">R$ {{pessoa.1}}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
