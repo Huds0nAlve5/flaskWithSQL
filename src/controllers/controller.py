@@ -126,7 +126,7 @@ class listar_saldo_controller(MethodView):
         saldo = [0]*qtd_pessoas[0]
         
         for pessoa_r in pessoas_receita:
-            saldo[pessoa_r[2]-1] = pessoa_r[1]
+            saldo[pessoa_r[2]-1] += pessoa_r[1]
         
         for pessoa_d in pessoas_despesa:
             saldo[pessoa_d[2]-1] -= pessoa_d[1]
