@@ -33,9 +33,13 @@ class listar_pessoa_controller(MethodView):
 class del_pessoa_controller(MethodView):
     def post(self, id):
         with mysql.cursor() as cur:
-            cur.execute("DELETE FROM PESSOA WHERE ID = %s", (id))
-            cur.connection.commit()
-            return redirect("/")
+            try:
+                cur.execute("DELETE FROM PESSOA WHERE ID = %s", (id))
+                cur.connection.commit()
+                flash('Cadastro removido com sucesso!', 'success')
+            except:
+                flash('Erro ao remover cadastro!', 'error')
+            return redirect("/listagem/pessoas")
         
 class updt_pessoa_controller(MethodView):
     def get(self, id):
@@ -49,9 +53,13 @@ class updt_pessoa_controller(MethodView):
         age = request.form['age']
 
         with mysql.cursor() as cur:
-            cur.execute("UPDATE PESSOA SET name = %s, age = %s WHERE id = %s", (name, age, id))
-            cur.connection.commit()
-            return redirect('/')
+            try:
+                cur.execute("UPDATE PESSOA SET name = %s, age = %s WHERE id = %s", (name, age, id))
+                cur.connection.commit()
+                flash('Pessoa atualizada com sucesso!', 'success')
+            except:
+                flash('Erro ao atualizar cadastro', 'error')
+            return redirect('/listagem/pessoas')
         
 class cadastro_transacao_controller(MethodView):
     def get(self):
@@ -74,10 +82,12 @@ class cadastro_transacao_controller(MethodView):
         value = request.form['value']
         id_pessoa = request.form['id_pessoa']
         id_type = request.form['id_type']
+        id_p = id_pessoa.split()
+        
 
         with mysql.cursor() as cur:
             try:
-                cur.execute("INSERT INTO transacao VALUES (null, %s, %s, %s, %s)", (descricao, value, id_pessoa, id_type))
+                cur.execute("INSERT INTO transacao VALUES (null, %s, %s, %s, %s)", (descricao, value, id_p[0], id_type))
                 cur.connection.commit()
                 flash('Transacao cadastrada com sucesso!', 'success')
             except:

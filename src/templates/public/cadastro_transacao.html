@@ -12,16 +12,16 @@
         </div>
 
         <div class="form-group">
-            <select name="id_pessoa" id="nome" required="true">
+            <select name="id_pessoa" id="select_pessoa" required="true">
                 <option value="">---- Selecione a pessoa ----</option>
                 {% for pessoa in pessoas %}
-                    <option value="{{pessoa.0}}">{{pessoa.1}}</option>
+                    <option value="{{pessoa.0}}  {{pessoa.2}}">{{pessoa.1}}</option>
                 {% endfor %}
               </select>
         </div>
 
         <div class="form-group">
-            <select name="id_type" id="nome" required="true">
+            <select name="id_type" id="tipo" required="true">
                 <option value="">---- Selecione o tipo ----</option>
                 {% for tipo in tipos %}
                     <option value="{{tipo.0}}">{{tipo.1}}</option>
@@ -29,6 +29,7 @@
               </select>
         </div>
 
-        <button type="submit" class="btn btn-primary">Cadastrar</button>
+        <button type="submit" class="btn btn-primary" id="botao_blck">Cadastrar</button>
     </form>
+
 {% endblock %}
