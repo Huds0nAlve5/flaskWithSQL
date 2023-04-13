@@ -100,15 +100,37 @@ class listar_transacao_controller(MethodView):
 class listar_saldo_controller(MethodView):
     def get(self):
         with mysql.cursor() as cur:
-            cur.execute("SELECT name, CAST(sum(value) AS DECIMAL(16,2)) FROM pessoa inner join transacao on pessoa.id = transacao.id_pessoa where transacao.id_type = 1 group by transacao.id_pessoa order by pessoa.id;")
+            cur.execute("SELECT name, CAST(sum(value) AS DECIMAL(16,2)), id_pessoa FROM pessoa inner join transacao on pessoa.id = transacao.id_pessoa where transacao.id_type = 1 group by transacao.id_pessoa order by pessoa.id;")
             pessoas_receita = cur.fetchall()
+
         with mysql.cursor() as cur:
-            cur.execute("SELECT sum(value) FROM transacao where id_type=1 GROUP by id_pessoa;")
-            receitas = cur.fetchall()
-        with mysql.cursor() as cur:
-            cur.execute("SELECT name, CAST(sum(value) AS DECIMAL(16,2)) FROM pessoa inner join transacao on pessoa.id = transacao.id_pessoa where transacao.id_type = 2 group by transacao.id_pessoa order by pessoa.id;")
+            cur.execute("SELECT name, CAST(sum(value) AS DECIMAL(16,2)), id_pessoa FROM pessoa inner join transacao on pessoa.id = transacao.id_pessoa where transacao.id_type = 2 group by transacao.id_pessoa order by pessoa.id;")
             pessoas_despesa = cur.fetchall()
+
         with mysql.cursor() as cur:
-            cur.execute("SELECT sum(value) FROM transacao where id_type=2 GROUP by id_pessoa;")
-            despesas = cur.fetchall()
-        return render_template("public/listagem_saldo.html", pessoas_receita=pessoas_receita, receitas=receitas, despesas=despesas, pessoas_despesa=pessoas_despesa)
+            cur.execute("SELECT CAST(sum(value) AS DECIMAL(16,2)) FROM transacao where transacao.id_type = 1;")
+            receita_total = cur.fetchone()
+
+        with mysql.cursor() as cur:
+            cur.execute("SELECT CAST(sum(value) AS DECIMAL(16,2)) FROM transacao where transacao.id_type = 2;")
+            despesa_total = cur.fetchone()
+
+        with mysql.cursor() as cur:
+            cur.execute("SELECT COUNT(*) FROM pessoa")
+            qtd_pessoas = cur.fetchone()
+        
+        with mysql.cursor() as cur:
+            cur.execute("SELECT * FROM pessoa")
+            all_pessoas = cur.fetchall()
+
+        saldo = [0]*qtd_pessoas[0]
+        
+        for pessoa_r in pessoas_receita:
+            saldo[pessoa_r[2]-1] = pessoa_r[1]
+        
+        for pessoa_d in pessoas_despesa:
+            saldo[pessoa_d[2]-1] -= pessoa_d[1]
+        
+        saldo_total = sum(saldo)
+
+        return render_template("public/listagem_saldo.html", pessoas_receita=pessoas_receita, pessoas_despesa=pessoas_despesa, receita_total=receita_total, despesa_total=despesa_total, saldo=saldo, all_pessoas=all_pessoas, saldo_total=saldo_total)

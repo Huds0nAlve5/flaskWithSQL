@@ -37,3 +37,13 @@ table td{
     color: red;
     font-weight: 700;
 }
+
+#saldo{
+    color: blue;
+    font-weight: 700;
+}
+
+.total{
+    font-weight: 700;
+    color: black;
+}
