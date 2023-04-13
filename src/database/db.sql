@@ -21,6 +21,6 @@ CREATE TABLE IF NOT EXISTS tipo(
 );
 
 ALTER TABLE transacao ADD FOREIGN KEY (id_type)REFERENCES tipo(id);
-ALTER TABLE transacao ADD FOREIGN KEY (id_pessoa)REFERENCES pessoa(id);
+ALTER TABLE transacao ADD FOREIGN KEY (id_pessoa)REFERENCES pessoa(id) ON DELETE CASCADE;
 INSERT INTO tipo VALUES(null, "Receita");
 INSERT INTO tipo VALUES(null, "Despesa");
