@@ -133,7 +133,7 @@ class listar_saldo_controller(MethodView):
             cur.execute("SELECT * FROM pessoa")
             all_pessoas = cur.fetchall()
 
-        saldo = [0]*qtd_pessoas[0]
+        saldo = [0]*100
         
         for pessoa_r in pessoas_receita:
             saldo[pessoa_r[2]-1] += pessoa_r[1]

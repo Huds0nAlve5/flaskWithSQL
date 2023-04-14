@@ -5,11 +5,11 @@
 <form action="/atualizar/pessoa/{{pessoa.0}}" method="POST" id="form_pessoa">
 
     <label for="nome">Nome</label>
-    <input type="text" class="form-control" name="name" id="nome" value="{{pessoa.1}}">
+    <input type="text" class="form-control" name="name" id="nome" value="{{pessoa.1}}" required="true">
 
     <div class="form-group">
     <label for="idade">Idade</label>
-    <input type="number" class="form-control" name="age" id="idade" min="0" value="{{pessoa.2}}">
+    <input type="number" class="form-control" name="age" id="idade" min="1" value="{{pessoa.2}}" required="true">
     
     <button type="submit" class="btn btn-primary">Atualizar</button>
     </div>

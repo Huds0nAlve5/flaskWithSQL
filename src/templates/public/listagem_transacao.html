@@ -15,7 +15,13 @@
                 <tr>
                     <td>{{transacao.1}}</td>
                     <td>R$ {{transacao.2}}</td>
-                    <td>{{pessoas[transacao.3-1].1}}</td>
+                    <td>
+                        {% for pessoa in pessoas%}
+                            {% if(pessoa.0 == transacao.3) %}
+                                {{pessoa.1}}
+                            {% endif %}
+                        {% endfor %}
+                    </td>
                     <td>{{tipos[transacao.4-1].1}}</td>
                 </tr>
             {% endfor %}
